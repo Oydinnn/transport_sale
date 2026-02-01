@@ -1,9 +1,16 @@
 import JWT from "jsonwebtoken";
 import staffModel from "../models/staff.js";
 import { hashPassword, comparePassword } from "../utills/bcrypt.utils.js";
-import {ConflictError, InternalServerError, NotFoundError, BadRequestError, UnauthorizedError,} from "../utills/error.utils.js";
+import {
+  ConflictError,
+  InternalServerError,
+  NotFoundError,
+  BadRequestError,
+  UnauthorizedError,
+} from "../utills/error.utils.js";
+import { Logger } from "../logs/logger.js";
 
-const register = async (req, res) => {
+const register = async (req, res, next) => {
   try {
     const { username, password, role, branch, ...otherFields } = req.body;
 
@@ -30,7 +37,7 @@ const register = async (req, res) => {
         branch: newStaff.branch,
       },
       process.env.JWT_SECRET,
-      { expiresIn: "7d" }
+      { expiresIn: "7d" },
     );
 
     return res.status(201).json({
@@ -45,16 +52,22 @@ const register = async (req, res) => {
       message: "Ro'yxatdan o'tildi",
     });
   } catch (error) {
-    console.error("Register xatosi:", error);
+    Logger.error("Register xatosi:", {
+      message: error.message,
+      method: req.method,
+      url: req.originalUrl,
+      ip: req.ip,
+      userAgent: req.get("user-agent"),
+    });
     // duplicate username uchun maxsus holat
     if (err.code === 11000) {
-      throw next (new ConflictError(409, "Bu username allaqachon band"));
+      throw next(new ConflictError(409, "Bu username allaqachon band"));
     }
     next(err);
   }
 };
 
-const login = async (req, res) => {
+const login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
@@ -62,9 +75,7 @@ const login = async (req, res) => {
       throw new BadRequestError(400, "Username va parol kiritilishi shart");
     }
 
-    const staff = await staffModel
-      .findOne({ username })
-      .select("+password"); 
+    const staff = await staffModel.findOne({ username }).select("+password");
 
     if (!staff) {
       throw new UnauthorizedError(401, "Username yoki parol noto'g'ri");
@@ -74,7 +85,6 @@ const login = async (req, res) => {
 
     if (!isMatch) {
       throw new UnauthorizedError(401, "Username yoki parol noto'g'ri");
-
     }
 
     const token = JWT.sign(
@@ -84,7 +94,7 @@ const login = async (req, res) => {
         branch: staff.branch,
       },
       process.env.JWT_SECRET,
-      { expiresIn: "7d" }
+      { expiresIn: "7d" },
     );
 
     return res.status(200).json({
@@ -99,32 +109,44 @@ const login = async (req, res) => {
       message: "Muvaffaqiyatli kirish amalga oshirildi",
     });
   } catch (error) {
-    console.error("Login xatosi:", error);
-    next(error)
+    Logger.error("Login xatosi:", {
+      message: error.message,
+      method: req.method,
+      url: req.originalUrl,
+      ip: req.ip,
+      userAgent: req.get("user-agent"),
+    });
+    next(error);
   }
 };
 
-const getAllStaffes = async(req, res)=>{
+const getAllStaffes = async (req, res, next) => {
   try {
-    const data = await staffModel.find()
-    if(!data.length){
-        return res.status(200).json({
-          status: 200,
-          message:"users empty"
-        })
-      }
-
+    const data = await staffModel.find();
+    if (!data.length) {
       return res.status(200).json({
         status: 200,
-        data
-      })
-  } catch (error) {
-    console.error("getAllStaffes xatosi:", error);
-    next(error)
-  }
-}
+        message: "users empty",
+      });
+    }
 
-const updateStaff = async (req, res) => {
+    return res.status(200).json({
+      status: 200,
+      data,
+    });
+  } catch (error) {
+    Logger.error("getAllStaffes xatosi:", {
+      message: error.message,
+      method: req.method,
+      url: req.originalUrl,
+      ip: req.ip,
+      userAgent: req.get("user-agent"),
+    });
+    next(error);
+  }
+};
+
+const updateStaff = async (req, res, next) => {
   try {
     const { id } = req.params;
     const updateData = req.body;
@@ -132,7 +154,7 @@ const updateStaff = async (req, res) => {
     const updatedStaff = await staffModel.findByIdAndUpdate(
       id,
       { $set: updateData },
-      { new: true, runValidators: true }
+      { new: true, runValidators: true },
     );
 
     if (!updatedStaff) {
@@ -145,13 +167,18 @@ const updateStaff = async (req, res) => {
       data: updatedStaff,
     });
   } catch (error) {
-    console.error("Update xatosi:", error);
-    next(error)
+    Logger.error("UpdateStaff xatosi:", {
+      message: error.message,
+      method: req.method,
+      url: req.originalUrl,
+      ip: req.ip,
+      userAgent: req.get("user-agent"),
+    });
+    next(error);
   }
 };
 
-
-const deleteStaff = async (req, res) => {
+const deleteStaff = async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -167,16 +194,21 @@ const deleteStaff = async (req, res) => {
       deletedId: id,
     });
   } catch (error) {
-    console.error("Delete xatosi:", error);
-    next(error)
+    Logger.error("DeleteStaff xatosi:", {
+      message: error.message,
+      method: req.method,
+      url: req.originalUrl,
+      ip: req.ip,
+      userAgent: req.get("user-agent"),
+    });
+    next(error);
   }
 };
-
 
 export default {
   register,
   login,
   getAllStaffes,
   updateStaff,
-  deleteStaff
+  deleteStaff,
 };
