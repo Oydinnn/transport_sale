@@ -17,17 +17,17 @@ class UserMiddleware{
     }
   }
 
-  //  login = (req, res, next) => {
-  //   try {
-  //     const {error} = validation.loginSchema.validate(req.body)
-  //     if(error){
-  //       throw next(new BadRequestError(400, error.details[0].message,))
-  //     }
-  //      next()
-  //   } catch (error) {
-  //     next(error)
-  //   }
-  // }
+   login = (req, res, next) => {
+    try {
+      const {error} = validation.loginSchema.validate(req.body)
+      if(error){
+        throw next(new BadRequestError(400, error.details[0].message,))
+      }
+       next()
+    } catch (error) {
+      next(error)
+    }
+  }
 
   // files = (req, res, next) => {
   //   try {

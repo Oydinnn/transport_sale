@@ -1,16 +1,14 @@
 import JWT from "jsonwebtoken";
 import staffModel from "../models/staff.js";
 import { hashPassword, comparePassword } from "../utills/bcrypt.utils.js";
+import {ConflictError, InternalServerError, NotFoundError, BadRequestError, UnauthorizedError,} from "../utills/error.utils.js";
 
 const register = async (req, res) => {
   try {
     const { username, password, role, branch, ...otherFields } = req.body;
 
     if (!username || !password) {
-      return res.status(400).json({
-        success: false,
-        message: "Username va parol majburiy",
-      });
+      throw new BadRequestError(400, "Username va parol majburiy");
     }
 
     const hashedPassword = await hashPassword(password);
@@ -48,18 +46,11 @@ const register = async (req, res) => {
     });
   } catch (error) {
     console.error("Register xatosi:", error);
-
-    if (error.code === 11000) {
-      return res.status(400).json({
-        success: false,
-        message: "Bu username allaqachon band",
-      });
+    // duplicate username uchun maxsus holat
+    if (err.code === 11000) {
+      throw next (new ConflictError(409, "Bu username allaqachon band"));
     }
-
-    return res.status(500).json({
-      success: false,
-      message: error.message || "Serverda xatolik yuz berdi",
-    });
+    next(err);
   }
 };
 
@@ -68,10 +59,7 @@ const login = async (req, res) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
-      return res.status(400).json({
-        success: false,
-        message: "Username va parol kiritilishi shart",
-      });
+      throw new BadRequestError(400, "Username va parol kiritilishi shart");
     }
 
     const staff = await staffModel
@@ -79,19 +67,14 @@ const login = async (req, res) => {
       .select("+password"); 
 
     if (!staff) {
-      return res.status(401).json({
-        success: false,
-        message: "Username yoki parol noto'g'ri",
-      });
+      throw new UnauthorizedError(401, "Username yoki parol noto'g'ri");
     }
 
     const isMatch = await comparePassword(password, staff.password);
 
     if (!isMatch) {
-      return res.status(401).json({
-        success: false,
-        message: "Username yoki parol noto'g'ri",
-      });
+      throw new UnauthorizedError(401, "Username yoki parol noto'g'ri");
+
     }
 
     const token = JWT.sign(
@@ -117,14 +100,83 @@ const login = async (req, res) => {
     });
   } catch (error) {
     console.error("Login xatosi:", error);
-    return res.status(500).json({
-      success: false,
-      message: "Serverda xatolik yuz berdi",
-    });
+    next(error)
   }
 };
+
+const getAllStaffes = async(req, res)=>{
+  try {
+    const data = await staffModel.find()
+    if(!data.length){
+        return res.status(200).json({
+          status: 200,
+          message:"users empty"
+        })
+      }
+
+      return res.status(200).json({
+        status: 200,
+        data
+      })
+  } catch (error) {
+    console.error("getAllStaffes xatosi:", error);
+    next(error)
+  }
+}
+
+const updateStaff = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
+
+    const updatedStaff = await staffModel.findByIdAndUpdate(
+      id,
+      { $set: updateData },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedStaff) {
+      throw new NotFoundError(404, "Xodim topilmadi");
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Xodim ma'lumotlari yangilandi",
+      data: updatedStaff,
+    });
+  } catch (error) {
+    console.error("Update xatosi:", error);
+    next(error)
+  }
+};
+
+
+const deleteStaff = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deletedStaff = await staffModel.findByIdAndDelete(id);
+
+    if (!deletedStaff) {
+      throw new NotFoundError(404, "O'chiriladigan xodim topilmadi");
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Xodim muvaffaqiyatli o'chirildi",
+      deletedId: id,
+    });
+  } catch (error) {
+    console.error("Delete xatosi:", error);
+    next(error)
+  }
+};
+
 
 export default {
   register,
   login,
+  getAllStaffes,
+  updateStaff,
+  deleteStaff
 };

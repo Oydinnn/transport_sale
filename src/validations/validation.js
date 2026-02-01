@@ -15,7 +15,7 @@ class Validations{
   registerSchema = Joi.object({
     branch: objectIdSchema.required().messages({'any.required': 'Branch tanlanishi shart','any.invalid': "Branch ID noto'g'ri"}),
     username:Joi.string().alphanum().min(3).max(20).required(),
-    password:Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{6,20}$')),
+    password:Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{6,255}$')),
     birth_date: Joi.date().max('now').required(),
     gender: Joi.string().valid('male', 'female').required(),
     role: Joi.string().valid('staff', 'admin', 'superadmin').default('staff')

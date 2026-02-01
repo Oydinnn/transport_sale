@@ -47,7 +47,7 @@ export class ForbiddenError extends Error{
 export class UnauthorizedError extends Error{
   constructor(status, message){
     super()
-    this.status = 403
+    this.status = 401
     this.message = message
     this.name = 'UnauthorizedError'
   }
