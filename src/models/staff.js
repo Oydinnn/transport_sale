@@ -16,6 +16,10 @@ const staffSchema = new mongoose.Schema({
       required: true,
       select: false
     }, 
+    email:{
+      type: String,
+      required: true,
+    },
     birth_date:{
       type: Date,
       required: true,

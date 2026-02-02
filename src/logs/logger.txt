@@ -40,3 +40,49 @@
 2026-02-02 09:13:49 [ERROR] [GET] [/api/transport] [::1] [PostmanRuntime/7.51.1] : branches is not defined
 2026-02-02 09:14:42 [ERROR] [GET] [/api/transport] [::1] [PostmanRuntime/7.51.1] : transportlarni ko'rishda xatolik: branches is not defined
 2026-02-02 09:14:42 [ERROR] [GET] [/api/transport] [::1] [PostmanRuntime/7.51.1] : branches is not defined
+2026-02-02 13:12:46 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: fs is not defined
+2026-02-02 13:12:46 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : err is not defined
+2026-02-02 13:14:31 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: join is not defined
+2026-02-02 13:14:31 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : join is not defined
+2026-02-02 13:14:50 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: join is not a function
+2026-02-02 13:14:50 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : join is not a function
+2026-02-02 13:15:05 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: ENOENT: no such file or directory, open '/Users/macbookair/Desktop/TRANSPORT SALE/src/database/otp.json'
+2026-02-02 13:15:05 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : ENOENT: no such file or directory, open '/Users/macbookair/Desktop/TRANSPORT SALE/src/database/otp.json'
+2026-02-02 13:15:30 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: email or otp wrong
+2026-02-02 13:22:29 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: email or otp wrong
+2026-02-02 13:23:13 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: email or otp wrong
+2026-02-02 13:26:26 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: email or otp wrong
+2026-02-02 13:28:51 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: email or otp wrong
+2026-02-02 13:34:55 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: email or otp wrong
+2026-02-02 13:40:43 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: Expected ',' or '}' after property value in JSON at position 260 (line 15 column 5)
+2026-02-02 13:40:43 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Expected ',' or '}' after property value in JSON at position 260 (line 15 column 5)
+2026-02-02 13:42:24 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: staffs validation failed: email: Path `email` is required.
+2026-02-02 13:42:24 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : staffs validation failed: email: Path `email` is required.
+2026-02-02 13:44:48 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: staffs validation failed: email: Path `email` is required.
+2026-02-02 13:44:48 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : staffs validation failed: email: Path `email` is required.
+2026-02-02 13:45:08 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: staffs validation failed: email: Path `email` is required.
+2026-02-02 13:45:08 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : staffs validation failed: email: Path `email` is required.
+2026-02-02 13:45:41 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: staffs validation failed: email: Path `email` is required.
+2026-02-02 13:45:41 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : staffs validation failed: email: Path `email` is required.
+2026-02-02 13:46:19 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: staffs validation failed: email: Path `email` is required.
+2026-02-02 13:46:19 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : staffs validation failed: email: Path `email` is required.
+2026-02-02 13:47:06 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: staffs validation failed: email: Path `email` is required.
+2026-02-02 13:47:06 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : staffs validation failed: email: Path `email` is required.
+2026-02-02 13:52:22 [ERROR] [POST] [/api/login] [::1] [PostmanRuntime/7.51.1] : Login xatosi: newStaff is not defined
+2026-02-02 13:52:22 [ERROR] [POST] [/api/login] [::1] [PostmanRuntime/7.51.1] : newStaff is not defined
+2026-02-02 13:52:40 [ERROR] [POST] [/api/login] [::1] [PostmanRuntime/7.51.1] : Login xatosi: newStaff is not defined
+2026-02-02 13:52:40 [ERROR] [POST] [/api/login] [::1] [PostmanRuntime/7.51.1] : newStaff is not defined
+2026-02-02 14:04:05 [ERROR] [POST] [/api/login] [::1] [PostmanRuntime/7.51.1] : Login xatosi: newStaff is not defined
+2026-02-02 14:04:05 [ERROR] [POST] [/api/login] [::1] [PostmanRuntime/7.51.1] : newStaff is not defined
+2026-02-02 14:04:18 [ERROR] [POST] [/api/login] [::1] [PostmanRuntime/7.51.1] : Login xatosi: newStaff is not defined
+2026-02-02 14:04:18 [ERROR] [POST] [/api/login] [::1] [PostmanRuntime/7.51.1] : newStaff is not defined
+2026-02-02 14:07:43 [ERROR] [POST] [/api/login] [::1] [PostmanRuntime/7.51.1] : Login xatosi: newStaff is not defined
+2026-02-02 14:07:43 [ERROR] [POST] [/api/login] [::1] [PostmanRuntime/7.51.1] : newStaff is not defined
+2026-02-02 14:12:03 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: email or otp wrong
+2026-02-02 14:12:53 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: email or otp wrong
+2026-02-02 14:12:58 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: email or otp wrong
+2026-02-02 14:15:39 [ERROR] [POST] [/api/login] [::1] [PostmanRuntime/7.51.1] : Login xatosi: newStaff is not defined
+2026-02-02 14:15:39 [ERROR] [POST] [/api/login] [::1] [PostmanRuntime/7.51.1] : newStaff is not defined
+2026-02-02 14:16:59 [ERROR] [POST] [/api/login] [::1] [PostmanRuntime/7.51.1] : Login xatosi: newStaff is not defined
+2026-02-02 14:16:59 [ERROR] [POST] [/api/login] [::1] [PostmanRuntime/7.51.1] : newStaff is not defined
+2026-02-02 14:21:53 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: E11000 duplicate key error collection: transport_sale.staffs index: username_1 dup key: { username: "Jahon" }

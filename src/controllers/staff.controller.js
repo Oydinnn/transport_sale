@@ -9,6 +9,8 @@ import {
   UnauthorizedError,
 } from "../utills/error.utils.js";
 import { Logger } from "../logs/logger.js";
+import fs from 'fs'
+import {join} from 'path'
 
 const register = async (req, res, next) => {
   try {
@@ -17,6 +19,13 @@ const register = async (req, res, next) => {
     if (!username || !password) {
       throw new BadRequestError(400, "Username va parol majburiy");
     }
+    // let otps = fs.readFileSync(join(process.cwd(), "src", "database", "otp.json"), 'utf-8')
+    // otps = JSON.parse(otps)
+
+    // const ExistOtp = otps.find(o => o.otp === +otp && o.email === email)
+    // if(!ExistOtp){
+    //   throw new BadRequestError(400, "email or otp wrong")
+    // }
 
     const hashedPassword = await hashPassword(password);
 
@@ -30,14 +39,26 @@ const register = async (req, res, next) => {
 
     console.log("Yangi staff yaratildi:", newStaff.username);
 
-    const token = JWT.sign(
+    const accessToken = JWT.sign(
       {
         id: newStaff._id,
         role: newStaff.role,
-        branch: newStaff.branch,
+        ip: req.ip,
+        userAgent: req.get("user-agent"),
       },
       process.env.JWT_SECRET,
       { expiresIn: "7d" },
+    );
+
+    const refreshToken = JWT.sign(
+      {
+        id: newStaff._id,
+        role: newStaff.role,
+        ip: req.ip,
+        userAgent: req.get("user-agent"),
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "30d" },
     );
 
     return res.status(201).json({
@@ -48,7 +69,8 @@ const register = async (req, res, next) => {
         role: newStaff.role || "staff",
         branch: newStaff.branch,
       },
-      token,
+      accessToken,
+      refreshToken,
       message: "Ro'yxatdan o'tildi",
     });
   } catch (error) {
@@ -60,10 +82,10 @@ const register = async (req, res, next) => {
       userAgent: req.get("user-agent"),
     });
     // duplicate username uchun maxsus holat
-    if (err.code === 11000) {
+    if (error.code === 11000) {
       throw next(new ConflictError(409, "Bu username allaqachon band"));
     }
-    next(err);
+    next(error);
   }
 };
 
@@ -87,14 +109,26 @@ const login = async (req, res, next) => {
       throw new UnauthorizedError(401, "Username yoki parol noto'g'ri");
     }
 
-    const token = JWT.sign(
+    const accessToken = JWT.sign(
       {
         id: staff._id,
         role: staff.role,
-        branch: staff.branch,
+        ip: req.ip,
+        userAgent: req.get("user-agent"),
       },
       process.env.JWT_SECRET,
       { expiresIn: "7d" },
+    );
+
+    const refreshToken = JWT.sign(
+      {
+        id: staff._id,
+        role: staff.role,
+        ip: req.ip,
+        userAgent: req.get("user-agent"),
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "30d" },
     );
 
     return res.status(200).json({
@@ -105,7 +139,8 @@ const login = async (req, res, next) => {
         role: staff.role,
         branch: staff.branch,
       },
-      token,
+      accessToken,
+      refreshToken,
       message: "Muvaffaqiyatli kirish amalga oshirildi",
     });
   } catch (error) {

@@ -8,7 +8,7 @@ const router = Router()
 
 router
   .post("/api/transport", checkTokenMiddleware,roleGuard(["superadmin", "admin"]), transportController.addTransport)
-  .get("/api/transport", checkTokenMiddleware,roleGuard(["superadmin", "admin"]), transportController.getAllTransportes)
+  .get("/api/transport", checkTokenMiddleware,roleGuard(["superadmin", "admin", "staff"]), transportController.getAllTransportes)
   .put("/api/transport/:id", checkTokenMiddleware, roleGuard(["superadmin", "admin"]), transportController.changeTransport)
   .delete("/api/transport/:id", checkTokenMiddleware, roleGuard(["superadmin"]), transportController.deleteTransport)
 
