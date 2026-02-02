@@ -33,3 +33,5 @@ const transportSchema = new mongoose.Schema({
   }
 
 })
+
+export default mongoose.model("transports", transportSchema)

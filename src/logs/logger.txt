@@ -23,3 +23,20 @@
 2026-02-01 14:40:12 [ERROR] [POST] [/api/login] [::1] [PostmanRuntime/7.51.1] : Xato Username yoki parol noto'g'ri
 2026-02-01 14:41:41 [ERROR] [POST] [/api/login] [::1] [PostmanRuntime/7.51.1] : Xato Username yoki parol noto'g'ri
 2026-02-01 14:47:23 [ERROR] [POST] [/api/login] [::1] [PostmanRuntime/7.51.1] : Login xatosi: Username yoki parol noto'g'ri
+2026-02-01 20:39:41 [ERROR] [POST] [/api/login] [::1] [PostmanRuntime/7.51.1] : Login xatosi: Username yoki parol noto'g'ri
+2026-02-02 08:04:28 [ERROR] [POST] [/api/branch] [undefined] [undefined] : Logger is not defined
+2026-02-02 08:06:47 [ERROR] [POST] [/api/branch] [undefined] [undefined] : Logger is not defined
+2026-02-02 08:08:24 [ERROR] [POST] [/api/branch] [undefined] [undefined] : Logger is not defined
+2026-02-02 08:11:12 [ERROR] [POST] [/api/branch] [::1] [PostmanRuntime/7.51.1] : Logger is not defined
+2026-02-02 08:12:13 [ERROR] [POST] [/api/branch] [::1] [PostmanRuntime/7.51.1] : Filial yaratishda xato: E11000 duplicate key error collection: transport_sale.branches index: name_1 dup key: { name: "Buxoroo" }
+2026-02-02 08:12:13 [ERROR] [POST] [/api/branch] [::1] [PostmanRuntime/7.51.1] : err is not defined
+2026-02-02 08:12:32 [ERROR] [POST] [/api/branch] [::1] [PostmanRuntime/7.51.1] : Filial yaratishda xato: E11000 duplicate key error collection: transport_sale.branches index: name_1 dup key: { name: "Buxoroo" }
+2026-02-02 08:12:32 [ERROR] [POST] [/api/branch] [::1] [PostmanRuntime/7.51.1] : ConflictError is not defined
+2026-02-02 09:10:46 [ERROR] [POST] [/api/transport] [::1] [PostmanRuntime/7.51.1] : Transport yaratishda xatolik: transports validation failed: branch: Path `branch` is required.
+2026-02-02 09:10:46 [ERROR] [POST] [/api/transport] [::1] [PostmanRuntime/7.51.1] : transports validation failed: branch: Path `branch` is required.
+2026-02-02 09:13:40 [ERROR] [GET] [/api/transport] [::1] [PostmanRuntime/7.51.1] : transportlarni ko'rishda xatolik: branches is not defined
+2026-02-02 09:13:40 [ERROR] [GET] [/api/transport] [::1] [PostmanRuntime/7.51.1] : branches is not defined
+2026-02-02 09:13:49 [ERROR] [GET] [/api/transport] [::1] [PostmanRuntime/7.51.1] : transportlarni ko'rishda xatolik: branches is not defined
+2026-02-02 09:13:49 [ERROR] [GET] [/api/transport] [::1] [PostmanRuntime/7.51.1] : branches is not defined
+2026-02-02 09:14:42 [ERROR] [GET] [/api/transport] [::1] [PostmanRuntime/7.51.1] : transportlarni ko'rishda xatolik: branches is not defined
+2026-02-02 09:14:42 [ERROR] [GET] [/api/transport] [::1] [PostmanRuntime/7.51.1] : branches is not defined

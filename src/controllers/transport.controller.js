@@ -1,19 +1,19 @@
-import branchModel from "../models/branch.js";
+import transportModel from "../models/transport.js";
 import { Logger } from "../logs/logger.js";
 
-const create = async (req, res, next) => {
+const addTransport = async (req, res, next) => {
   try {
-    const newBranch = await branchModel.create(req.body);
-    console.log("Yangi filial:", newBranch);
+    const newTransport = await transportModel.create(req.body);
+    console.log("Yangi transport:", newTransport);
   
     return res.status(201).json({
       success: true,
-      data: newBranch,
-      message: "Filial yaratildi"
+      data: newTransport,
+      message: "transport yaratildi"
     });
     
   } catch (error) {
-    Logger.error("Filial yaratishda xato:", {
+    Logger.error("Transport yaratishda xatolik:", {
           message: error.message,
           method: req.method,
           url: req.originalUrl,
@@ -22,24 +22,24 @@ const create = async (req, res, next) => {
         });
         // duplicate branch uchun maxsus holat
         if (error.code === 11000) {
-          throw next(new ConflictError(409, "Bu branch allaqachon band"));
+          throw next(new ConflictError(409, "Bu transport allaqachon band"));
         }
     next(error)
   }
 };
 
-const getAllBranches = async (req, res, next) => {
+const getAllTransportes = async (req, res, next) => {
   try {
-    const branches = await branchModel.find();
+    const transportes = await transportModel.find();
   
     return res.status(200).json({
       success: true,
-      data: branches,
-      message: "All branches"
+      data: transportes,
+      message: "All transportes"
     });
     
   } catch (error) {
-    Logger.error("Filiallarni ko'rishda xatolik:", {
+    Logger.error("transportlarni ko'rishda xatolik:", {
           message: error.message,
           method: req.method,
           url: req.originalUrl,
@@ -50,7 +50,7 @@ const getAllBranches = async (req, res, next) => {
   }
 };
 
-const updateBranch = async (req, res, next) => {
+const changeTransport = async (req, res, next) => {
   try {
     const { id } = req.params;
     const updateData = req.body;
@@ -61,27 +61,27 @@ const updateBranch = async (req, res, next) => {
         message: "ID talab qilinadi"
       });
     }
-    const branch = await branchModel.findByIdAndUpdate(
+    const transport = await transportModel.findByIdAndUpdate(
       id,
       updateData,
       { new: true, runValidators: true }
     );
     
-    if (!branch) {
+    if (!transport) {
       return res.status(404).json({
         success: false,
-        message: "Filial topilmadi"
+        message: "transport topilmadi"
       });
     }
     
     return res.status(200).json({
       success: true,
-      data: branch,
-      message: "Filial yangilandi"
+      data: transport,
+      message: "transport yangilandi"
     });
     
   } catch (error) {
-    Logger.error("Bunday filial mavjud emas:", {
+    Logger.error("Bunday transport mavjud emas:", {
           message: error.message,
           method: req.method,
           url: req.originalUrl,
@@ -93,7 +93,7 @@ const updateBranch = async (req, res, next) => {
 };
 
 
-const deleteBranch = async (req, res, next) => {
+const deleteTransport = async (req, res, next) => {
   try {
     const { id } = req.params;
  
@@ -103,23 +103,23 @@ const deleteBranch = async (req, res, next) => {
         message: "ID talab qilinadi"
       });
     }
-    const branch = await branchModel.findByIdAndDelete(id);
+    const transport = await transportModel.findByIdAndDelete(id);
     
-    if (!branch) {
+    if (!transport) {
       return res.status(404).json({
         success: false,
-        message: "Filial topilmadi"
+        message: "transport topilmadi"
       });
     }
     
     return res.status(200).json({
       success: true,
-      data: branch,
-      message: "Filial o'chirildi"
+      data: transport,
+      message: "transport o'chirildi"
     });
     
   } catch (error) {
-    Logger.error("Bunday filial mavjud emas:", {
+    Logger.error("Bunday transport mavjud emas:", {
           message: error.message,
           method: req.method,
           url: req.originalUrl,
@@ -131,8 +131,8 @@ const deleteBranch = async (req, res, next) => {
 };
 
 export default {
-  create,
-  getAllBranches,
-  updateBranch,
-  deleteBranch
+  addTransport,
+  getAllTransportes,
+  changeTransport,
+  deleteTransport
 };
