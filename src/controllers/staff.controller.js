@@ -19,13 +19,13 @@ const register = async (req, res, next) => {
     if (!username || !password) {
       throw new BadRequestError(400, "Username va parol majburiy");
     }
-    // let otps = fs.readFileSync(join(process.cwd(), "src", "database", "otp.json"), 'utf-8')
-    // otps = JSON.parse(otps)
+    let otps = fs.readFileSync(join(process.cwd(), "src", "database", "otp.json"), 'utf-8')
+    otps = JSON.parse(otps)
 
-    // const ExistOtp = otps.find(o => o.otp === +otp && o.email === email)
-    // if(!ExistOtp){
-    //   throw new BadRequestError(400, "email or otp wrong")
-    // }
+    const ExistOtp = otps.find(o => o.otp === +otp && o.email === email)
+    if(!ExistOtp){
+      throw new BadRequestError(400, "email or otp wrong")
+    }
 
     const hashedPassword = await hashPassword(password);
 

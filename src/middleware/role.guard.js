@@ -1,19 +1,16 @@
 import { rolePermissions } from "../utills/permission.js";
+import { ForbiddenError } from '../utills/error.utils.js' 
 
 const roleGuard= (roles) =>{
   return (req, res, next) =>{
     try {
       if(!rolePermissions[req.user.role].includes(req.method) || !roles.includes(req.user.role)){
-        return res.status(403).json({
-          status: 403,
-          message: "Permission berilmagan"
-        })
+        throw new ForbiddenError(403, "Permission berilmagan");
       }
       next()
     } catch (error) {
-      console.log(error);
+      next(error);
     }
   }
 }
-
 export default roleGuard

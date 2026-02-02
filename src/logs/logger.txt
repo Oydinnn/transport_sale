@@ -86,3 +86,8 @@
 2026-02-02 14:16:59 [ERROR] [POST] [/api/login] [::1] [PostmanRuntime/7.51.1] : Login xatosi: newStaff is not defined
 2026-02-02 14:16:59 [ERROR] [POST] [/api/login] [::1] [PostmanRuntime/7.51.1] : newStaff is not defined
 2026-02-02 14:21:53 [ERROR] [POST] [/api/register] [::1] [PostmanRuntime/7.51.1] : Register xatosi: E11000 duplicate key error collection: transport_sale.staffs index: username_1 dup key: { username: "Jahon" }
+2026-02-02 16:06:32 [ERROR] [POST] [/permission] [::1] [PostmanRuntime/7.51.1] : Logger is not defined
+2026-02-02 16:07:20 [ERROR] [POST] [/permission] [::1] [PostmanRuntime/7.51.1] : create permission xatosi: permissions validation failed: desc: Path `desc` is required.
+2026-02-02 16:07:20 [ERROR] [POST] [/permission] [::1] [PostmanRuntime/7.51.1] : permissions validation failed: desc: Path `desc` is required.
+2026-02-02 16:09:06 [ERROR] [POST] [/permission] [::1] [PostmanRuntime/7.51.1] : create permission xatosi: permissions validation failed: desc: Path `desc` is required.
+2026-02-02 16:09:06 [ERROR] [POST] [/permission] [::1] [PostmanRuntime/7.51.1] : permissions validation failed: desc: Path `desc` is required.

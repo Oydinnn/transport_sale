@@ -29,6 +29,13 @@ class Validations{
     password:Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{6,20}$')).required()
   })
 
+  permissionSchema = Joi.object({
+  name: Joi.string().min(3).max(50).required(),
+  desc: Joi.string().max(200).optional()
+});
+
+
+
   // fileSchema = Joi.object({
   //   title:Joi.string().min(3).max(20).required(),
   //   // user_id:Joi.number().required()

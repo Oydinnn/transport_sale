@@ -4,12 +4,14 @@ import { connectDB } from "./database/config.js";
 import staffRoute from "./routes/staff.route.js";
 import branchRoute from "./routes/branch.route.js";
 import transportRoute from "./routes/transport.route.js"
+import permissionRoute from "./routes/permission.route.js";
 import { Logger } from "./logs/logger.js";
 import nodemailer from 'nodemailer'
 import fs from 'fs'
 import { join } from 'path'
 import { BadRequestError } from "./utills/error.utils.js";
 import { error } from "console";
+
 
 
 config();
@@ -19,6 +21,8 @@ app.use(express.json());
 app.use(staffRoute);
 app.use(branchRoute);
 app.use(transportRoute);
+app.use(permissionRoute);
+
 
 
 const transporter = nodemailer.createTransport({

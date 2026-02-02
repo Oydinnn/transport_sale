@@ -29,6 +29,18 @@ class UserMiddleware{
     }
   }
 
+  permission = (req, res, next) => {
+    try {
+      const {error} = validation.permissionSchema.validate(req.body)
+      if(error){
+        throw next(new BadRequestError(400, error.details[0].message,))
+      }
+       next()
+    } catch (error) {
+      next(error)
+    }
+  }
+
   // files = (req, res, next) => {
   //   try {
   //     const {error} = validation.fileSchema.validate(req.body)
